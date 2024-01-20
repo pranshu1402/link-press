@@ -1,0 +1,42 @@
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: auto;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  flex: 1;
+}
+
+.border-s {
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.border-m {
+  border: 1.5px solid #999;
+  border-radius: 6px;
+}
+
+.p-s {
+  padding: 8px;
+}
+
+.p-r {
+  padding: 16px;
+}
+
+.m-s {
+  margin: 8px;
+}
+
+.m-r {
+  margin: 16px;
+}

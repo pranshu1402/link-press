@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Link press shortener</title>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/common.css" />
+    <link rel="stylesheet" type="text/css" href="/stylesheets/users.css" />
+</head>
+
+<body>
+    <div class="column">
+        <form id="shortener-form" class="row border-s p-s">
+            <input id="link-input" placeholder="Paste your link here..." type="url" required />
+            <button id="submit-btn" type="submit">
+                Generate
+            </button>
+        </form>
+
+        <button class="border-s" onClick="redirectToMyLinks()">My Links</button>
+    </div>
+
+</body>
+<script src="scripts/http.js"></script>
+<script src="scripts/shortener.js"></script>
+
+</html>

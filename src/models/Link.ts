@@ -22,9 +22,9 @@ export interface ILinkData {
   failedViews: number;
   expireBy: Date;
   deleted?: boolean;
-  createdAt: Date;
+  createdAt?: Date;
   createdBy: number;
-  updatedAt: Date;
+  updatedAt?: Date;
 }
 
 // **** SCHEMA **** //

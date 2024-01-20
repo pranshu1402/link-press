@@ -13,7 +13,7 @@ import logger from 'jet-logger';
 
 import 'express-async-errors';
 
-import BaseRouter from '@src/routes/api';
+import BaseRouter from '@src/routes';
 import Paths from '@src/constants/Paths';
 
 import EnvVars from '@src/constants/EnvVars';
@@ -127,12 +127,7 @@ app.get('/my-profile', (req: Request, res: Response) => {
 
 // Redirect to login if not logged in.
 app.get('/not-found', (req: Request, res: Response) => {
-  const jwt = req.signedCookies[EnvVars.CookieProps.Key];
-  if (!jwt) {
-    res.redirect('/');
-  } else {
-    res.sendFile('notFound.html', { root: viewsDir });
-  }
+  res.sendFile('pageNotFound.html', { root: viewsDir });
 });
 
 // **** Export default **** //

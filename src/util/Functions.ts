@@ -49,3 +49,15 @@ export function addDaysToDate(date: Date = new Date(), days: number = 7): Date {
   const updatedTimeStamp = newDate.setDate(newDate.getDate() + days);
   return new Date(updatedTimeStamp);
 }
+
+export function base62encode(number: number) {
+  const alphabet =
+    '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  let encodedString = '';
+  while (number > 0) {
+    const remainder = number % 62;
+    encodedString = alphabet[remainder] + encodedString;
+    number = Math.floor(number / 62);
+  }
+  return encodedString;
+}

@@ -1,8 +1,7 @@
 import * as e from 'express';
 import { Query } from 'express-serve-static-core';
 
-import { ISessionUser } from '@src/models/User';
-
+import { ISessionUser, IUser } from '@src/models/User';
 
 // **** Express **** //
 
@@ -19,4 +18,10 @@ export interface IRes extends e.Response {
   locals: {
     sessionUser: ISessionUser;
   };
+}
+
+export interface ILoginReq {
+  email: string;
+  password: string;
+  user?: IUser;
 }
