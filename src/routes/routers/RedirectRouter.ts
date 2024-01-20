@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { IReq, IRes } from '@src/routes/middleware/types';
-import { fetchRecordByQuery } from '@src/util/DbHelper';
+import { fetchRecordByQuery, updateRecord } from '@src/util/DbHelper';
 import LinkModel, { ILinkData } from '@src/models/Link';
 import HttpStatusCodes from '@src/constants/HttpStatusCodes';
 
@@ -27,8 +27,37 @@ async function redirectToOriginalUrl(req: IReq, res: IRes) {
     !(linkData as ILinkData).longUrl ||
     (linkData as ILinkData).expireBy < new Date();
   if (linkNotFoundOrExpired) {
+    if (linkData) {
+      updateRecord({
+        collection: LinkModel,
+        req,
+        res,
+        options: {
+          body: {
+            failedViews: (linkData as ILinkData).failedViews + 1,
+          },
+          query: {
+            shortUrl: id,
+          },
+        },
+      });
+    }
+
     res.redirect(HttpStatusCodes.NOT_FOUND, '/not-found');
   } else {
+    updateRecord({
+      collection: LinkModel,
+      req,
+      res,
+      options: {
+        body: {
+          clickCount: (linkData as ILinkData).clickCount + 1,
+        },
+        query: {
+          shortUrl: id,
+        },
+      },
+    });
     res.redirect(HttpStatusCodes.FOUND, (linkData as ILinkData).longUrl);
   }
 }
