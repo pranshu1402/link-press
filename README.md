@@ -3,6 +3,20 @@
 LinkPress is a system that enables users to convert long URLs into short aliases. When these aliases are used, they redirects to the original long URLs along with time of expiry. Additionally, the system should provide analytics for each short link, including the number of visits.
 Project is created with [express-generator-typescript](https://github.com/seanpmaxwell/express-generator-typescript).
 
+## How to run project
+### Steps to run locally:
+- Clone git repo
+- Make sure to have node version > 16.0
+- Install all npm dependencies using `npm i`
+- Run the server in development mode: `npm run dev`
+
+### `npm run build`
+Build the project for production.
+
+### `npm start`
+Run the production build (Must be built first).
+
+
 ## Available APIS
 
 ### Auth:
@@ -45,17 +59,3 @@ email: string;
 pwdHash?: string;
 role?: UserRoles;
 }
-
-## Available Scripts
-
-### `npm run dev`
-
-Run the server in development mode.
-
-### `npm run build`
-
-Build the project for production.
-
-### `npm start`
-
-Run the production build (Must be built first).
