@@ -2,16 +2,16 @@
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 
-import StatusCodes from '@src/constants/HttpStatusCodes';
-import mongoose, { FilterQuery, QueryOptions } from 'mongoose';
+import StatusCodes from "@src/constants/HttpStatusCodes";
+import mongoose, { FilterQuery, QueryOptions } from "mongoose";
 import {
   INSERT_RECORD_ERROR_MESSAGE,
   NotFoundError,
   ServerError,
-} from '@src/util/Errors';
-import { Constants } from '@src/constants/Constants';
-import { getISODateStr } from '@src/util/Functions';
-import { Request, Response } from 'express';
+} from "@src/util/Errors";
+import { Constants } from "@src/constants/Constants";
+import { getISODateStr } from "@src/util/Functions";
+import { Request, Response } from "express";
 
 const { CREATED, OK } = StatusCodes;
 
@@ -26,7 +26,9 @@ export interface DbHelperParams {
     responseParser?: (data: unknown, count?: number) => unknown;
     ids?: string[];
     filterOptions?: unknown;
+    sortConfig?: { [sortBy: string]: number };
     callback?: (data: unknown) => Promise<unknown>;
+    handleResponseManually?: boolean;
   };
 }
 
@@ -83,12 +85,13 @@ export async function updateRecord({
       },
     },
     {
-      returnDocument: 'after',
+      returnDocument: "after",
       projection: Constants.DEFAULT_PROJECTION,
     }
   );
 
-  res.status(OK).json({ data: updatedRecord });
+  if (!options.handleResponseManually)
+    res.status(OK).json({ data: updatedRecord });
 }
 
 /* *********************** READS / FETCHING ************************/
@@ -99,12 +102,18 @@ export async function fetchRecordByQuery({
 }: DbHelperParams) {
   const { query, responseParser, project } = options || {};
 
+  const configOption = {};
+
+  if (options.sortConfig) {
+    configOption["sort"] = options.sortConfig;
+  }
   // eslint-disable-next-line @typescript-eslint/await-thenable
   const data = await collection.findOne(
     { deleted: false, ...(query || {}) } as FilterQuery<unknown>,
     {
       projection: project || Constants.DEFAULT_PROJECTION,
-    }
+    },
+    configOption
   );
 
   const parsedData = responseParser ? responseParser(data) : data;
@@ -133,12 +142,12 @@ function getQueryOptionsWithSortAndPagination(
 
   /* eslint-disable indent */
   switch (queryParams?.sortDir?.toString()) {
-    case 'desc':
-    case '-1':
+    case "desc":
+    case "-1":
       sortDir = -1;
       break;
-    case 'asc':
-    case '1':
+    case "asc":
+    case "1":
     default:
       sortDir = Constants.SORT_DIR;
   }
@@ -226,6 +235,6 @@ export async function deleteRecord({
   } else if (updatedDocumentsResponse.matchedCount === 0) {
     throw new NotFoundError();
   } else {
-    throw new ServerError('Something went wrong, while deleting your records');
+    throw new ServerError("Something went wrong, while deleting your records");
   }
 }

@@ -1,45 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Link Press: My links</title>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/common.css" />
+    <link rel="stylesheet" type="text/css" href="/stylesheets/allLinks.css" />
+  </head>
 
-<head>
-    <meta charset="UTF-8">
-    <title>Users</title>
-    <link rel="stylesheet" type="text/css" href="/stylesheets/users.css" />
-</head>
-
-<body>
-
-    <!-- Add Users -->
-    <div class="users-column add-user-col">
-        <div class="column-header">
-            Add User:
-        </div>
-        <div>
-            <input id="name-input" placeholder="Name" />
-        </div>
-        <div>
-            <input id="email-input" placeholder="Email" />
-        </div>
-        <div>
-            <button id="add-user-btn">
-                Add
-            </button>
-        </div>
-        <div>
-            <button id="logout-btn">
-                Logout
-            </button>
-        </div>
+  <body>
+    <header class="app-header">
+      <div class="logo-container">
+        <a class="logo" href="/generate">Link Press</a>
+      </div>
+      <ul class="nav-list">
+        <li>
+          <button class="list-link" onClick="onLogout()">Logout</button>
+        </li>
+      </ul>
+    </header>
+    <div class="column" style="margin: auto">
+      <h2 class="column-header" id="column-header">My Links</h2>
+      <div class="my-link-container" id="all-links"></div>
     </div>
-
-    <!-- Display Users -->
-    <div class="users-column">
-        <div class="column-header">Users:</div>
-        <div id="all-users-anchor"></div>
-    </div>
-
-</body>
-<script src="scripts/http.js"></script>
-<script src="scripts/users.js"></script>
-
+  </body>
+  <script src="scripts/http.js"></script>
+  <script src="scripts/allLinks.js"></script>
 </html>

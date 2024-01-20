@@ -1,58 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Link Press: Auth</title>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/common.css" />
+    <link rel="stylesheet" type="text/css" href="/stylesheets/login.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <title>Auth</title>
-  <link rel="stylesheet" type="text/css" href="/stylesheets/common.css" />
-  <link rel="stylesheet" type="text/css" href="/stylesheets/login.css" />
-</head>
+  <body>
+    <header class="app-header">
+      <div class="logo-container">
+        <a class="logo" href="/generate">Link Press</a>
+      </div>
+      <div class="nav-list"></div>
+    </header>
+    <div class="auth-block row border-s">
+      <div class="login-block">
+        <div class="login-header">Login</div>
 
-<body>
+        <div class="login-input">
+          Email:<br />
+          <input id="email-input" type="email" />
+        </div>
 
-  <div class="login-block">
-    <div class="login-header">Login</div>
+        <div class="login-input">
+          Password:<br />
+          <input id="pwd-input" type="password" />
+        </div>
 
-    <div class="login-input">
-      Email:<br />
-      <input id="email-input" type="email" />
+        <button id="login-btn" style="margin-top: auto">Login</button>
+      </div>
+
+      <div
+        class="login-block border-m"
+        style="
+          border-radius: 0;
+          border-width: 0px 0px 0px 1px;
+          padding-left: 4em;
+          margin-left: 2em;
+        "
+      >
+        <div class="login-header">Register</div>
+
+        <div class="login-input">
+          Username:<br />
+          <input id="new-username-input" type="text" />
+        </div>
+
+        <div class="login-input">
+          Email:<br />
+          <input id="new-email-input" type="email" />
+        </div>
+
+        <div class="login-input">
+          Password:<br />
+          <input id="new-pwd-input" type="password" />
+        </div>
+
+        <div>
+          <button id="register-btn">Register</button>
+        </div>
+      </div>
     </div>
-
-    <div class="login-input">
-      Password:<br />
-      <input id="pwd-input" type="password" />
-    </div>
-
-    <div style="margin-top: auto;">
-      <button id="login-btn">Login</button>
-    </div>
-  </div>
-
-  <div class="login-block" style="border-left: 1px solid black; padding-left: 4em; margin-left: 2em;">
-    <div class="login-header">Register</div>
-
-    <div class="login-input">
-      Username:<br />
-      <input id="new-username-input" type="text" />
-    </div>
-
-    <div class="login-input">
-      Email:<br />
-      <input id="new-email-input" type="email" />
-    </div>
-
-    <div class="login-input">
-      Password:<br />
-      <input id="new-pwd-input" type="password" />
-    </div>
-
-    <div>
-      <button id="register-btn">Register</button>
-    </div>
-  </div>
-
-</body>
-<script src="scripts/http.js"></script>
-<script src="scripts/login.js"></script>
-
+  </body>
+  <script src="scripts/http.js"></script>
+  <script src="scripts/login.js"></script>
 </html>

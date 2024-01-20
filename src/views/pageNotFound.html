@@ -1,45 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Users</title>
-    <link rel="stylesheet" type="text/css" href="/stylesheets/users.css" />
-</head>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/common.css" />
+  </head>
 
-<body>
-
+  <body>
+    <header class="app-header">
+      <div class="logo-container">
+        <a class="logo" href="/generate">Link Press</a>
+      </div>
+    </header>
     <!-- Add Users -->
-    <div class="users-column add-user-col">
-        <div class="column-header">
-            Add User:
-        </div>
-        <div>
-            <input id="name-input" placeholder="Name" />
-        </div>
-        <div>
-            <input id="email-input" placeholder="Email" />
-        </div>
-        <div>
-            <button id="add-user-btn">
-                Add
-            </button>
-        </div>
-        <div>
-            <button id="logout-btn">
-                Logout
-            </button>
-        </div>
+    <div class="column" style="height: 80vh">
+      <img src="assets/page-not-found.jpg" class="p-s" style="height: 80%" />
+      <span>Oops, Page not found!</span>
     </div>
-
-    <!-- Display Users -->
-    <div class="users-column">
-        <div class="column-header">Users:</div>
-        <div id="all-users-anchor"></div>
-    </div>
-
-</body>
-<script src="scripts/http.js"></script>
-<script src="scripts/users.js"></script>
-
+  </body>
+  <script src="scripts/http.js"></script>
+  <script src="scripts/users.js"></script>
 </html>

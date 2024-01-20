@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 // **** Variables **** //
 
@@ -18,10 +18,10 @@ export interface IUser {
 }
 
 export interface ISessionUser {
-  id: number;
+  _id: string;
   email: string;
   name: string;
-  role: IUser['role'];
+  role: IUser["role"];
 }
 
 const { Schema } = mongoose;
@@ -30,15 +30,15 @@ const UserSchema = new Schema(
   {
     name: {
       type: String,
-      required: [true, 'User name is required'],
+      required: [true, "User name is required"],
     },
     email: {
       type: String,
-      required: [true, 'User email is required'],
+      required: [true, "User email is required"],
     },
     pwdHash: {
       type: String,
-      default: '',
+      default: "",
     },
     role: {
       type: Number,
@@ -52,6 +52,6 @@ const UserSchema = new Schema(
   { timestamps: true }
 );
 
-const UserModel = mongoose.model('User', UserSchema);
+const UserModel = mongoose.model("User", UserSchema);
 
 export default UserModel;

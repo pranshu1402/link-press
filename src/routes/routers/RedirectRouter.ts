@@ -1,26 +1,26 @@
-import { Router } from 'express';
-import { IReq, IRes } from '@src/routes/middleware/types';
-import { fetchRecordByQuery, updateRecord } from '@src/util/DbHelper';
-import LinkModel, { ILinkData } from '@src/models/Link';
-import HttpStatusCodes from '@src/constants/HttpStatusCodes';
+import { IReq, IRes } from "@src/routes/middleware/types";
+import { fetchRecordByQuery, updateRecord } from "@src/util/DbHelper";
+import LinkModel, { ILinkData } from "@src/models/Link";
+import HttpStatusCodes from "@src/constants/HttpStatusCodes";
 
-const redirectRouter = Router();
-
-redirectRouter.get('', redirectToOriginalUrl);
-
-async function redirectToOriginalUrl(req: IReq, res: IRes) {
+export async function redirectToOriginalUrl(req: IReq, res: IRes) {
   const { id } = req.params;
 
-  const linkData = await fetchRecordByQuery({
-    collection: LinkModel,
-    req,
-    res,
-    options: {
-      query: {
-        shortUrl: id,
+  let linkData;
+  try {
+    linkData = await fetchRecordByQuery({
+      collection: LinkModel,
+      req,
+      res,
+      options: {
+        query: {
+          shortUrl: id,
+        },
       },
-    },
-  });
+    });
+  } catch (err) {
+    linkData = null;
+  }
 
   const linkNotFoundOrExpired =
     !linkData ||
@@ -28,7 +28,7 @@ async function redirectToOriginalUrl(req: IReq, res: IRes) {
     (linkData as ILinkData).expireBy < new Date();
   if (linkNotFoundOrExpired) {
     if (linkData) {
-      updateRecord({
+      await updateRecord({
         collection: LinkModel,
         req,
         res,
@@ -39,13 +39,14 @@ async function redirectToOriginalUrl(req: IReq, res: IRes) {
           query: {
             shortUrl: id,
           },
+          handleResponseManually: true,
         },
       });
     }
 
-    res.redirect(HttpStatusCodes.NOT_FOUND, '/not-found');
+    res.redirect("/not-found");
   } else {
-    updateRecord({
+    await updateRecord({
       collection: LinkModel,
       req,
       res,
@@ -56,10 +57,10 @@ async function redirectToOriginalUrl(req: IReq, res: IRes) {
         query: {
           shortUrl: id,
         },
+        handleResponseManually: true,
       },
     });
+
     res.redirect(HttpStatusCodes.FOUND, (linkData as ILinkData).longUrl);
   }
 }
-
-export default redirectRouter;

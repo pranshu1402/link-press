@@ -1,0 +1,47 @@
+.my-link-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 70vw;
+}
+
+.link-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  gap: 6px;
+}
+
+.click-count-div {
+  width: 40px;
+  margin: 4px auto;
+}
+
+.url-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 8px;
+  width: calc(100% - 200px);
+  margin: 4px auto;
+}
+
+.long-url {
+}
+
+.short-url {
+}
+
+.right-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 8px;
+  width: 60px;
+}
+
+.time-stamp-container {
+}
+
+.status-container {
+}

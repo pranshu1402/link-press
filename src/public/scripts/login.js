@@ -1,11 +1,11 @@
 // Login user
 document.addEventListener(
-  'click',
-  event => {
+  "click",
+  (event) => {
     event.preventDefault();
-    if (event.target.matches('#login-btn')) {
+    if (event.target.matches("#login-btn")) {
       loginEventHandler();
-    } else if (event.target.matches('#register-btn')) {
+    } else if (event.target.matches("#register-btn")) {
       registerUserEventHandler();
     }
   },
@@ -13,21 +13,25 @@ document.addEventListener(
 );
 
 function loginEventHandler() {
-  var emailInput = document.getElementById('email-input');
-  var pwdInput = document.getElementById('pwd-input');
+  var emailInput = document.getElementById("email-input");
+  var pwdInput = document.getElementById("pwd-input");
   var data = {
     email: emailInput.value,
     password: pwdInput.value,
   };
-  Http.post('/auth/login', data).then(() => {
-    window.location.href = '/files';
+  Http.post("/api/auth/login", data).then((res) => {
+    if (res.status === 200 && !res.error) {
+      window.location.href = "/generate";
+    } else {
+      alert("Invalid login details!");
+    }
   });
 }
 
 function registerUserEventHandler() {
-  var userName = document.getElementById('new-username-input')?.value;
-  var email = document.getElementById('new-email-input')?.value;
-  var password = document.getElementById('new-pwd-input')?.value;
+  var userName = document.getElementById("new-username-input")?.value;
+  var email = document.getElementById("new-email-input")?.value;
+  var password = document.getElementById("new-pwd-input")?.value;
 
   if (!userName || !email || !password) return;
 
@@ -40,7 +44,11 @@ function registerUserEventHandler() {
     },
   };
 
-  Http.post('/user/register', data).then(() => {
-    window.location.href = '/files';
+  Http.post("/api/user/register", data).then((res) => {
+    if (res.status === 201) {
+      window.location.href = "/generate";
+    } else {
+      alert("Invalid login details!");
+    }
   });
 }

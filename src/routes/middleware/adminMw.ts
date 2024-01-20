@@ -2,21 +2,21 @@
  * Middleware to verify user logged in and is an an admin.
  */
 
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response, NextFunction } from "express";
 
-import HttpStatusCodes from '@src/constants/HttpStatusCodes';
+import HttpStatusCodes from "@src/constants/HttpStatusCodes";
 
-import { ISessionUser, IUser } from '@src/models/User';
-import EnvVars from '@src/constants/EnvVars';
-import jwtUtil from '@src/util/JwtUtil';
-import { IReq } from './types';
-import { IRes } from './types';
-import PwdUtil from '@src/util/PwdUtil';
+import { ISessionUser, IUser } from "@src/models/User";
+import EnvVars from "@src/constants/EnvVars";
+import jwtUtil from "@src/util/JwtUtil";
+import { IReq } from "./types";
+import { IRes } from "./types";
+import PwdUtil from "@src/util/PwdUtil";
 
 // **** Variables **** //
 
-const jwtNotPresentErr = 'JWT not present in signed cookie.',
-  userUnauthErr = 'User not authorized to perform this action';
+const jwtNotPresentErr = "JWT not present in signed cookie.",
+  userUnauthErr = "User not authorized to perform this action";
 
 // **** Functions **** //
 
@@ -36,7 +36,7 @@ async function adminMw(req: Request, res: Response, next: NextFunction) {
   // Make sure user role is an admin
   const clientData = await jwtUtil.decode<ISessionUser>(jwt);
 
-  if (typeof clientData === 'object') {
+  if (typeof clientData === "object") {
     res.locals.sessionUser = clientData;
     return next();
     // Return an unauth error if user is not an admin

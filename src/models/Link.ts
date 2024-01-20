@@ -1,6 +1,6 @@
-import { addDaysToDate } from '@src/util/Functions';
-import { ObjectId } from 'mongodb';
-import mongoose from 'mongoose';
+import { addDaysToDate } from "@src/util/Functions";
+import { ObjectId } from "mongodb";
+import mongoose from "mongoose";
 
 // **** Types **** //
 export interface ILinkShortenReq {
@@ -15,7 +15,7 @@ export interface ILinkReActivateReq {
 
 export interface ILinkData {
   _id?: string | ObjectId;
-  index: number;
+  indexId: number;
   shortUrl: string;
   longUrl: string;
   clickCount: number;
@@ -23,7 +23,7 @@ export interface ILinkData {
   expireBy: Date;
   deleted?: boolean;
   createdAt?: Date;
-  createdBy: number;
+  createdBy: string | ObjectId;
   updatedAt?: Date;
 }
 
@@ -35,11 +35,14 @@ const LinkSchema = new Schema(
   {
     shortUrl: {
       type: String,
-      required: [true, 'Short url is required'],
+      required: [true, "Short url is required"],
     },
     longUrl: {
       type: String,
-      required: [true, 'Long url is required'],
+      required: [true, "Long url is required"],
+    },
+    indexId: {
+      type: Number,
     },
     clickCount: {
       type: Number,
@@ -55,7 +58,7 @@ const LinkSchema = new Schema(
     },
     createdBy: {
       type: String,
-      required: [true, 'Creator identity is required'],
+      required: [true, "Creator identity is required"],
     },
     deleted: {
       type: Boolean,
@@ -65,6 +68,6 @@ const LinkSchema = new Schema(
   { timestamps: true }
 );
 
-const LinkModel = mongoose.model('Link', LinkSchema);
+const LinkModel = mongoose.model("Link", LinkSchema);
 
 export default LinkModel;

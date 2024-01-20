@@ -1,27 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <title>Link press shortener</title>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Link Press: URL Shortener</title>
     <link rel="stylesheet" type="text/css" href="/stylesheets/common.css" />
-    <link rel="stylesheet" type="text/css" href="/stylesheets/users.css" />
-</head>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/shortener.css" />
+  </head>
 
-<body>
-    <div class="column">
-        <form id="shortener-form" class="row border-s p-s">
-            <input id="link-input" placeholder="Paste your link here..." type="url" required />
-            <button id="submit-btn" type="submit">
-                Generate
-            </button>
-        </form>
+  <body>
+    <header class="app-header">
+      <div class="logo-container">
+        <a class="logo" href="/generate">Link Press</a>
+      </div>
+      <ul class="nav-list">
+        <li>
+          <a href="/my-links" class="list-link">My links</a>
+        </li>
+        <li>
+          <button class="list-link" onClick="onLogout();">Logout</button>
+        </li>
+      </ul>
+    </header>
+    <div class="column" style="margin-top: 100px">
+      <form
+        id="shortener-form"
+        class="row border-s p-r"
+        style="width: 80vw; flex-wrap: wrap"
+      >
+        <input
+          id="link-input"
+          placeholder="Paste your link here..."
+          type="url"
+          style="
+            height: 40px;
+            width: 80%;
+            border-radius: 8px;
+            outline: none;
+            padding: 0;
+            padding-left: 8px;
+          "
+          required
+        />
+        <button
+          id="submit-btn"
+          type="submit"
+          class="p-s submit-btn m-r"
+          style="
+            margin-left: 8px;
+            padding-top: 0;
+            padding-bottom: 0;
+            height: 40px;
+            border-radius: 8px;
+          "
+        >
+          Minify Url
+        </button>
 
-        <button class="border-s" onClick="redirectToMyLinks()">My Links</button>
+        <em
+          class="shortened-url p-s"
+          id="shortened-url"
+          style="
+            width: 90%;
+            display: none;
+            align-self: center;
+            margin: auto;
+            margin-top: 28px;
+          "
+        ></em>
+      </form>
     </div>
-
-</body>
-<script src="scripts/http.js"></script>
-<script src="scripts/shortener.js"></script>
-
+  </body>
+  <script src="scripts/http.js"></script>
+  <script src="scripts/shortener.js"></script>
 </html>

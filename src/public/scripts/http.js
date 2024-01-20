@@ -2,11 +2,11 @@ var Http = (() => {
   // Setup request for json
   var getOptions = (verb, data) => {
     var options = {
-      dataType: 'json',
+      dataType: "json",
       method: verb,
       headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
+        Accept: "application/json",
+        "Content-Type": "application/json",
       },
     };
     if (data) {
@@ -16,9 +16,19 @@ var Http = (() => {
   };
   // Set Http methods
   return {
-    get: (path) => fetch(path, getOptions('GET')),
-    post: (path, data) => fetch(path, getOptions('POST', data)),
-    put: (path, data) => fetch(path, getOptions('PUT', data)),
-    delete: (path) => fetch(path, getOptions('DELETE')),
+    get: (path) => fetch(path, getOptions("GET")),
+    post: (path, data) => fetch(path, getOptions("POST", data)),
+    put: (path, data) => fetch(path, getOptions("PUT", data)),
+    delete: (path) => fetch(path, getOptions("DELETE")),
   };
 })();
+
+function onLogout() {
+  Http.get("/api/auth/logout").then((res) => {
+    if (res.status === 200) {
+      window.location.href = "/";
+    } else {
+      alert("Failed to logout, please try again!");
+    }
+  });
+}
