@@ -11,7 +11,7 @@ export default {
   },
   Users: {
     Base: '/users',
-    Add: '/add',
+    Register: '/register',
     Update: '/update',
     Delete: '/delete/:id',
   },

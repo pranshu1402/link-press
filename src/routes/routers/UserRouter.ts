@@ -14,7 +14,7 @@ import Paths from '@src/constants/Paths';
 const userRouter = Router();
 
 // Add one user
-userRouter.post(Paths.Users.Add, generatePwdHash, registerUser);
+userRouter.post(Paths.Users.Register, generatePwdHash, registerUser);
 
 // Update one user
 userRouter.put(Paths.Users.Update, adminMw, update);
