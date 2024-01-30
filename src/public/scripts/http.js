@@ -32,3 +32,9 @@ function onLogout() {
     }
   });
 }
+
+window.addEventListener('load', () => {
+  const logoutButton = document.getElementById("logout-button");
+  if (logoutButton)
+    logoutButton.addEventListener("click", (e) => onLogout());
+});

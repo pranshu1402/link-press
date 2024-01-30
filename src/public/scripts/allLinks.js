@@ -67,7 +67,7 @@ function getLinkHtml(linkData) {
   const statusContainer = document.createElement("div");
   statusContainer.classList.add("status-container");
   statusContainer.innerHTML = `Status: ${
-    linkData.expireBy > new Date() ? "Active" : "Inactive"
+    linkData.expireBy > (new Date()).toISOString() ? "Active" : "Inactive"
   }`;
 
   urlContainer.appendChild(timeStampContainer);
